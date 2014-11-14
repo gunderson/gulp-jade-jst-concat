@@ -1,0 +1,19 @@
+{
+  "name": "gulp-jade-jst-concat",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node tests/test.js"
+  },
+  "author": "Patrick Gunderson",
+  "license": "Copyright",
+  "dependencies": {
+    "colors": "*",
+    "through": "^2.3.6",
+    "underscore": "^1.7.0"
+  },
+  "peerDependencies":{
+    "jade": "*"
+  }
+}
