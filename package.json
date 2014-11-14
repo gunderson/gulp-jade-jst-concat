@@ -1,7 +1,7 @@
 {
   "name": "gulp-jade-jst-concat",
-  "version": "0.0.0",
-  "description": "",
+  "version": "0.0.2",
+  "description": "Compiles Jade templates into a commonjs module containing JST functions",
   "main": "index.js",
   "scripts": {
     "test": "node tests/test.js"

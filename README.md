@@ -18,13 +18,21 @@ $ npm install jade --save
 in your gulpfile.js
 
 ````js
-var src = [settings.templates + '/dynamic/*.jade', "!" + settings.templates + '/dynamic/_*.jade'];
-var dest = settings.dist;
-gulp.src(src)
-	.pipe(jade({
-		namespace: "JST",
-		client: true
-	}))
-	.pipe(concatJST('templates.js'))
-	.pipe(gulp.dest(settings[role].src + "/js"))
+
+var concatJST = require('gulp-jade-jst-concat');
+var jade = require('gulp-jade');
+
+function processDynamicTemplates(){
+	var src = [settings.templates + '/dynamic/*.jade', "!" + settings.templates + '/dynamic/_*.jade'];
+	var dest = settings.dist;
+	gulp.src(src)
+		.pipe(jade({
+			client: true
+		}))
+		.pipe(concatJST('templates.js'))
+		.pipe(gulp.dest(settings[role].src + "/js"))
+}
+
+gulp.task("dynamic-templates", processDynamicTemplates);
+
 ````
