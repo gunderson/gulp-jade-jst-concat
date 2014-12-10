@@ -24,7 +24,6 @@ function pluginError (message) {
 module.exports = function processFiles(fileName, _opts) {
   if (!fileName) throw pluginError('Missing fileName');
 
-  console.log(this);
 
 
   var defaults = {
