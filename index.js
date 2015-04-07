@@ -45,7 +45,7 @@ module.exports = function processFiles(fileName, _opts) {
   }
 
   function end () {
-    var concatedData = "module.exports = {\n";
+    var concatedData = "var jade = require('jade/runtime'); module.exports = {\n";
     concatedData += Object.keys(data).map(function(name) { return data[name].toString(); }).join(",\n");
     concatedData += "};\n";
 
