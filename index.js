@@ -23,7 +23,8 @@ module.exports = function processFiles(fileName, _opts) {
 
 
   var defaults = {
-        basepath: path.dirname(fileName)
+        basepath: path.dirname(fileName),
+        globals: {}
       },
       opts = extend(defaults, _opts),
       data = {};
@@ -43,7 +44,11 @@ module.exports = function processFiles(fileName, _opts) {
   }
 
   function end () {
-    var concatedData = "var jade = require('jade/runtime'); module.exports = {\n";
+    var concatedData = "var jade = require('jade/runtime');\n";
+    Object.keys(opts.globals).forEach(function(name) {
+      concatedData += "var " + name + " = require('" + opts.globals[name] + "');\n"
+    });
+    concatedData += "module.exports = {\n";
     concatedData += Object.keys(data).map(function(name) { return data[name].toString(); }).join(",\n");
     concatedData += "};\n";
 
