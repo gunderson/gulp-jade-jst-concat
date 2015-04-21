@@ -4,8 +4,6 @@ var File = gUtil.File;
 var through = require('through');
 var extend = require('util')._extend;
 var path = require("path");
-var fs = require("fs");
-
 
 /*
  * Takes the output from gulp-jade and transforms the names of the functions and
