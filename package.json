@@ -12,5 +12,8 @@
   "dependencies": {
     "gulp-util": "^3.0.4",
     "through": "^2.3.6"
+  },
+  "peerDependencies": {
+    "gulp-jade": "^1.0.0"
   }
 }
