@@ -1,19 +1,19 @@
 {
   "name": "gulp-jade-jst-concat",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Compiles Jade templates into a commonjs module containing JST functions",
   "main": "index.js",
-  "scripts": {
-    "test": "node tests/test.js"
-  },
   "author": "Patrick Gunderson",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gunderson/gulp-jade-jst-concat"
+  },
   "license": "Copyright",
   "dependencies": {
-    "colors": "*",
-    "through": "^2.3.6",
-    "underscore": "^1.7.0"
+    "gulp-util": "^3.0.4",
+    "through": "^2.3.6"
   },
-  "peerDependencies":{
-    "jade": "*"
+  "peerDependencies": {
+    "gulp-jade": "^1.0.0"
   }
 }

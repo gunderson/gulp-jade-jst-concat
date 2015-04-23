@@ -2,12 +2,8 @@ var gUtil = require('gulp-util');
 var PluginError = gUtil.PluginError;
 var File = gUtil.File;
 var through = require('through');
-var printf = require('util').format;
+var extend = require('util')._extend;
 var path = require("path");
-var fs = require("fs");
-var _ = require("underscore");
-var colors = require("colors");
-
 
 /*
  * Takes the output from gulp-jade and transforms the names of the functions and
@@ -27,33 +23,34 @@ module.exports = function processFiles(fileName, _opts) {
 
 
   var defaults = {
-      basepath: path.dirname(fileName)
-    },
-    opts = _.extend({}, defaults, _opts),
-    data = {};
+        basepath: path.dirname(fileName),
+        globals: {}
+      },
+      opts = extend(defaults, _opts),
+      data = {};
 
   function write (file) {
     if (file.isNull()) return;
     if (file.isStream()) return this.emit('error', pluginError('Streaming not supported'));
-    
-      //do stuff
+
+    //do stuff
 
 
     var basename = path.relative(opts.basepath, file.path).split(".js")[0];
     // Change the function name to the basename for the template
     file.contents = new Buffer(file.contents.toString().replace("function template", "\"" + basename + "\": function"));
-    
+
     data[basename] = file.contents;
   }
 
   function end () {
-    var concatedData = "var jade = require('jade/runtime'); module.exports = {\n";
-    var templateList = [];
-    _.each(data, function(fn, name){
-      concatedData += fn.toString() + ",\n";
+    var concatedData = "var jade = require('jade/runtime');\n";
+    Object.keys(opts.globals).forEach(function(name) {
+      concatedData += "var " + name + " = require('" + opts.globals[name] + "');\n"
     });
-    concatedData += "}";
-
+    concatedData += "module.exports = {\n";
+    concatedData += Object.keys(data).map(function(name) { return data[name].toString(); }).join(",\n");
+    concatedData += "};\n";
 
     this.queue(new File({
       path: fileName,
